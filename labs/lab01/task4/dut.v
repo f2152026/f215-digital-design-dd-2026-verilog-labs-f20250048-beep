@@ -6,7 +6,7 @@ module dut(
     output        cout
 );
 
-cla64_flat U_IMPL (
+cla64_blocked U_IMPL (
     .a(a),
     .b(b),
     .cin(cin),
