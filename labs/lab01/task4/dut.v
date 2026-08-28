@@ -6,7 +6,7 @@ module dut(
     output        cout
 );
 
-cla64_flat U_IMPL (
+rca64 U_IMPL (
     .a(a),
     .b(b),
     .cin(cin),
