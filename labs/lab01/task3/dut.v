@@ -23,24 +23,24 @@ module dut(
       //  .cin(cin),
       //  .sum(sum),
       //  .cout(cout)
-  //  );
+    //);
 
-     //OPTION 2: Gate-level carry-lookahead adder
-     cla4 U_IMPL (
-        .a(a),
-        .b(b),
-        .cin(cin),
-        .sum(sum),
-         .cout(cout)
-    );
-
-    // OPTION 3: Dataflow carry-lookahead adder
-    // cla4_dataflow U_IMPL (
+    // OPTION 2: Gate-level carry-lookahead adder
+    // cla4 U_IMPL (
     //     .a(a),
     //     .b(b),
     //     .cin(cin),
     //     .sum(sum),
     //     .cout(cout)
     // );
+
+    //OPTION 3: Dataflow carry-lookahead adder
+    cla4_dataflow U_IMPL (
+        .a(a),
+        .b(b),
+        .cin(cin),
+        .sum(sum),
+        .cout(cout)
+    );
 
 endmodule
