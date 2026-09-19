@@ -5,7 +5,7 @@ module and_beh_before (
 );
 
   always @(*) begin
-    #2 y = a & b;
+    #3 y = a & b;
   end
 
 endmodule
