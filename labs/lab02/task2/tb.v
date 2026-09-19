@@ -1,27 +1,50 @@
 // tb.v
-// Starter testbench template -- YOU complete this file.
+// Testbench for parameterized LUT
 
 module tb;
 
-  // TODO: declare the inputs and outputs
+  // DEPTH = 8, so sel needs 3 bits
+  reg [2:0] t_sel;
+  wire [7:0] t_dout;
 
-  // TODO: instantiate DUT here
+  integer i;
 
-  // Waveform dump configuration (DO NOT CHANGE)
+  // Instantiate LUT with parameter override
+  lut #(
+    .WIDTH(8),
+    .DEPTH(8)
+  ) U1 (
+    .sel  (t_sel),
+    .dout (t_dout)
+  );
+
+  // Waveform dump configuration
   string vcd_file;
+
   initial begin
     if ($value$plusargs("vcd=%s", vcd_file)) begin
       $dumpfile(vcd_file);
-      $dumpvars(0, DUT);
+      $dumpvars(0, U1);
     end
   end
 
+  // Test every valid address
   initial begin
-    // TODO: apply different input combinations
+    for (i = 0; i < 8; i = i + 1) begin
+      t_sel = i;
+      #5;
 
+      if (t_dout !== (i * i))
+        $display("ERROR: sel=%0d, expected=%0d, got=%0d",
+                 i, i * i, t_dout);
+      else
+        $display("PASS: sel=%0d, dout=%0d", i, t_dout);
+    end
+
+    $finish;
   end
 
   initial
-    $monitor($time, " I0=%b I1=%b S=%b | Y=%b", t_i0, t_i1, t_s, t_y); // change as required
+    $monitor($time, " sel=%b | dout=%b (%0d)", t_sel, t_dout, t_dout);
 
 endmodule
